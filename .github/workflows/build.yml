@@ -38,7 +38,7 @@ jobs:
 
       - name: End
         run: |
-          zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot
+          zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot/target/release
 
       - name: Peek A Boo
         run: |
