@@ -41,13 +41,15 @@ jobs:
       - run: cargo build --release --all-features
 
       - name: End
-        run: zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot/target/release \
-             mkdir -p x \
-             cp release.zip /home/runner/work/DownOnSpot/DownOnSpot/x/release.zip
+        run: |
+          zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot/target/release
+          mkdir -p x
+          cp release.zip /home/runner/work/DownOnSpot/DownOnSpot/x/release.zip
 
       - name: Peek A Boo
-        run: ls /home/runner/work/DownOnSpot/DownOnSpot \
-             ls /home/runner/work/DownOnSpot/DownOnSpot/x
+        run: |
+          ls /home/runner/work/DownOnSpot/DownOnSpot 
+          ls /home/runner/work/DownOnSpot/DownOnSpot/x
              
       - name: Release with Notes
         uses: softprops/action-gh-release@v1
