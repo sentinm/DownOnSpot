@@ -20,15 +20,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Environment
-        run: mkdir -p workdir
-        
-      - name: Jump in
-        run: cd workdir
         
       - name: Install dependencies
-        run: sudo apt install -y libasound2-dev libmp3lame-dev
+        run: sudo apt install -y libasound2-dev libmp3lame-dev zip
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -46,14 +40,19 @@ jobs:
 
       - run: cargo build --release --all-features
 
+      - name: End
+        run: zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot/target/release \
+            cp release.zip /home/runner/work/DownOnSpot/DownOnSpot/x/release.zip
+
       - name: Peek A Boo
-        run: ls /home/runner/work/DownOnSpot/DownOnSpot/target/release/
-      
+        run: ls /home/runner/work/DownOnSpot/DownOnSpot \
+             ls /home/runner/work/DownOnSpot/DownOnSpot/x
+             
       - name: Release with Notes
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            /home/runner/work/DownOnSpot/DownOnSpot/target/release/DownOnSpot.exe
+            /home/runner/work/DownOnSpot/DownOnSpot/x/release.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
