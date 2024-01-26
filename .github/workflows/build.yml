@@ -47,13 +47,13 @@ jobs:
       - run: cargo build --release --all-features
 
       - name: Peek A Boo
-        run: ls /home/runner/work/DownOnSpot/DownOnSpot/target/debug/
+        run: ls /home/runner/work/DownOnSpot/DownOnSpot/
       
       - name: Release with Notes
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            target/debug/DownOnSpot.exe
+            /home/runner/work/DownOnSpot/DownOnSpot/DownOnSpot.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
