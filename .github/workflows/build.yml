@@ -33,9 +33,9 @@ jobs:
         with:
           prefix-key: v${{steps.rust.outputs.cachekey}}-rust
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.FREE_LIBRESPOT_PRIVATE_KEY }}
+#      - name: Setup SSH
+#        uses: webfactory/ssh-agent@v0.5.3
+#        with:
+#          ssh-private-key: ${{ secrets.FREE_LIBRESPOT_PRIVATE_KEY }}
 
       - run: cargo build --release --all-features
