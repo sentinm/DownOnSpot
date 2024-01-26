@@ -47,7 +47,7 @@ jobs:
       - run: cargo build --release --all-features
 
       - name: Peek A Boo
-        run: ls /home/runner/work/DownOnSpot/DownOnSpot/
+        run: ls /home/runner/work/DownOnSpot/DownOnSpot/target/build/
       
       - name: Release with Notes
         uses: softprops/action-gh-release@v1
