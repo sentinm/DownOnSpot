@@ -21,6 +21,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Environment
+        run: mkdir -p workdir
+        
+      - name: Jump in
+        run: cd workdir
+        
       - name: Install dependencies
         run: sudo apt install -y libasound2-dev libmp3lame-dev
 
@@ -39,3 +45,11 @@ jobs:
 #          ssh-private-key: ${{ secrets.FREE_LIBRESPOT_PRIVATE_KEY }}
 
       - run: cargo build --release --all-features
+      
+      - name: Release with Notes
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/debug/DownOnSpot.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
