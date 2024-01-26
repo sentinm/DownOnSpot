@@ -1,13 +1,9 @@
 name: "Build"
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - 'v*.*' # Push events to matching v*, i.e. v1.0, v20.15.10
-    branches: [main]
-  pull_request:
-    branches: [main]
 
 env:
   CARGO_TERM_COLOR: always
@@ -43,19 +39,16 @@ jobs:
       - name: End
         run: |
           zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot/target/release
-          mkdir -p x
-          cp release.zip /home/runner/work/DownOnSpot/DownOnSpot/x/release.zip
 
       - name: Peek A Boo
         run: |
           ls /home/runner/work/DownOnSpot/DownOnSpot 
-          ls /home/runner/work/DownOnSpot/DownOnSpot/x
              
-      - name: Release with Notes
+      - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: |
-            /home/runner/work/DownOnSpot/DownOnSpot/x/release.zip
+          files: /home/runner/work/DownOnSpot/DownOnSpot/release.zip
+          token: ${{ secrets.GH_TOKEN }}
+          tag_name: v1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_REPOSITORY: sentinm/DownOnSpot
