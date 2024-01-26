@@ -36,7 +36,7 @@ jobs:
 
       - name: End
         run: |
-          zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot/target/release
+          zip -r release.zip /home/runner/work/DownOnSpot/DownOnSpot
 
       - name: Peek A Boo
         run: |
@@ -47,6 +47,6 @@ jobs:
         with:
           files: /home/runner/work/DownOnSpot/DownOnSpot/release.zip
           token: ${{ secrets.GH_TOKEN }}
-          tag_name: v1.0
+          tag_name: v1.1
         env:
           GITHUB_REPOSITORY: sentinm/DownOnSpot
